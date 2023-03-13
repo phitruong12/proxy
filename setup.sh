@@ -51,7 +51,7 @@ EOF
 }
 
 gen_proxy_file_for_user() {
-    cat >proxy.txt <<EOF
+    cat >airport.txt <<EOF
 $(awk -F "/" '{print $3 ":" $4 ":" $1 ":" $2 }' ${WORKDATA})
 EOF
 }
@@ -79,9 +79,9 @@ yum -y install gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
-echo "working folder = /home/bkns"
-WORKDIR="/home/bkns"
-WORKDATA="${WORKDIR}/data.txt"
+echo "working folder = /home/airport"
+WORKDIR="/home/airport"
+WORKDATA="${WORKDIR}/data2.txt"
 mkdir $WORKDIR && cd $_
 
 IP4=$(curl -4 -s icanhazip.com)
@@ -92,7 +92,7 @@ echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 FIRST_PORT=22000
 LAST_PORT=24000
 
-gen_data >$WORKDIR/data.txt
+gen_data >$WORKDIR/data2.txt
 gen_iptables >$WORKDIR/boot_iptables.sh
 gen_ifconfig >$WORKDIR/boot_ifconfig.sh
 chmod +x boot_*.sh /etc/rc.local
